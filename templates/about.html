@@ -1,4 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>About Page</h1>
+
+    
+
+    <h2>{{ page_title }}</h2>
+    <p>Thorin and Company refers to the thirteen exiled Dwarves under the leadership of Thorin Oakenshield and the one Hobbit
+    Bilbo Baggins, who famously made the Quest of Erebor, travelling through the Misty Mountains and the Wilderland to the
+    Lonely Mountain, to recover their ancient treasure from the Kingdom of Erebor, stolen by the Dragon Smaug.</p>
+
+        {% for member in company %}
+
+        <div class="row featurette">
+
+            {% if loop.index % 2 != 0 %}
+
+                <div class="col-md-7">
+                    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+                    <p>{{ member.description }}</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+                </div>
+
+                {% else %}
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+                </div>
+                <div class="col-md-7">
+                    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+                    <p>{{ member.description }}</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        {% if loop.index != loop.length %}
+        
+            <hr class="featurette-divider">
+    
+        {% endif %}
+
+    {% endfor %}
+
 {% endblock %}
